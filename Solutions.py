@@ -1,3 +1,4 @@
+from math import log10
 class Solution:
 
    def __init__(self, Name, KA, Molarity, Volume):
@@ -11,7 +12,7 @@ class Solution:
 
        self.SolutionMolarity = float(Molarity)
        self.SolutionVolume = float(Volume) # In liter's
-       self.SolutionMoles = self.SolutionVolume * self.SolutionMolarity
+       self.SolutionMoles = (self.SolutionVolume*.001) * self.SolutionMolarity
 
    def getSolutionMolarity(self):
        return self.SolutionMolarity
@@ -25,8 +26,8 @@ class Solution:
        # This procedure adds volume to the solution and adjusts
        # the solution's molarity based off the new volume
        moles = self.SolutionMoles #set local variable
-       self.SolutionVolume = AddedVolume + self.SolutionVolume #get new volume
-       self.SolutionMolarity = (moles / self.SolutionVolume) #update molarity
+       self.SolutionVolume += AddedVolume #get new volume
+       self.SolutionMolarity = (moles / (self.SolutionVolume*.001)) #update molarity
 
    def getName(self):
        return self.SolutionName #return name
@@ -42,11 +43,14 @@ class Solution:
 
    def setMoles(self, newAmount):
        self.SolutionMoles = newAmount
-       self.SolutionMolarity = self.SolutionMoles / self.SolutionVolume
+       self.SolutionMolarity = self.SolutionMoles / (self.SolutionVolume * .001)
 
    def isSolutionStrong(self):
-       if(self.SolutionKA > 1 or self.SolutionKA < (.000000000000001)):
+       if -1*log10(self.getSolutionKA()) >= 12 or -1*log10(self.getSolutionKA()) <= 2:
            return True
        else:
            return False
+
+
+
 
