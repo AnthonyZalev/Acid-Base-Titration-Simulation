@@ -8,19 +8,10 @@ def DeterminePH(Titrant, Analyte):  #Titrant is solution added #Analyte is Base
     Titrant.addVolume(Analyte.getSolutionVolume())
     Analyte.addVolume(temp)
 
-
     PH = 0
     #  If the analyte is the limiting reactant do the following
     if(Analyte.getMoles() > 0 and Titrant.getMoles() > 0):
         if Titrant.getMoles() >= Analyte.getMoles(): #If there is more solution to be added than base solution do the following
-            if(Titrant.isSolutionStrong() == True):
-                Titrant.setMoles(Titrant.getMoles() - Analyte.getMoles())
-                hydroniumConcentration = Titrant.getSolutionMolarity()
-                if(Titrant.getSolutionKA() <= .0000001 and not(hydroniumConcentration==0)):
-                    return 14 - (-1 * math.log10(hydroniumConcentration))
-                elif not(hydroniumConcentration == 0):
-                    return (-1 * math.log10(hydroniumConcentration))
-            else:
                 ConjugateConcentrations = Analyte.getSolutionMolarity()
                 Titrant.setMoles(Titrant.getMoles() - Analyte.getMoles())
                 hydroniumConcentration = Titrant.getSolutionKA() * (Titrant.getSolutionMolarity() / ConjugateConcentrations)
@@ -28,14 +19,6 @@ def DeterminePH(Titrant, Analyte):  #Titrant is solution added #Analyte is Base
                     return (-1 * math.log10(hydroniumConcentration))
 
         elif Titrant.getMoles() < Analyte.getMoles():
-            if(Analyte.isSolutionStrong() == True):
-                Analyte.setMoles(Analyte.getMoles() - Titrant.getMoles())
-                hydroniumConcentration = Analyte.getSolutionMolarity()
-                if (Analyte.getSolutionKA() <= .0000001 and not(hydroniumConcentration==0)):
-                    return 14 - (-1 * math.log10(hydroniumConcentration))
-                elif(not(hydroniumConcentration==0)):
-                    return (-1 * math.log10(hydroniumConcentration))
-            else:
                 ConjugateConcentration = Titrant.getSolutionMolarity()
                 Analyte.setMoles(Analyte.getMoles()-Titrant.getMoles())
                 hydroniumConcentration = Analyte.getSolutionKA() * (Analyte.getSolutionMolarity() / ConjugateConcentration)
