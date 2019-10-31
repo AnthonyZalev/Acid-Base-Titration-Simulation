@@ -6,21 +6,23 @@ import dash_html_components as html
 import dash_table
 import pandas as pd
 import plotly.graph_objs as go
-
+import Titration
 import plotly.plotly as py
 from dash.dependencies import Input, Output, State
 from DataBase import DataBase
-import Titration
+
+reader = DataBase();
+Acids = reader.ReadJSONFile("WeakSolutionNames")
+WeakAcidDictionary = []
+for x in Acids:
+    WeakAcidDictionary.append({'label': x, 'value': x})
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 #Section For getting a data for drop down menu
 reader = DataBase()
-Acids = reader.ReadJSONFile("WeakSolutionNames")
-WeakAcidDictionary = []
-for x in Acids:
-    WeakAcidDictionary.append({'label': x, 'value': x})
 WeakAcidTitrant = WeakAcidDictionary
 WeakAcidAnalyte = WeakAcidDictionary
 #initialize graph
@@ -47,7 +49,7 @@ app.layout = html.Div(
         #ROW 1
         html.Div(
             [
-                html.H3("Acid Base Graphing Calculator",className = "12 columns", style = {"color":"white","margin": 20,"width":"100vh"})
+                html.H3("Acid Base Graphing Calculator",className = "12 columns top-fixed", style = {"color":"white","margin": 20,"width":"100vh"})
             ]
             , className = "row", style = {"backgroundColor" :"#629fd1"}),
 
