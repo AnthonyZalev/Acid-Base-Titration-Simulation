@@ -1,1 +1,143 @@
-{"KAValues": [1.8e-05, 7.9e-05, 1.6e-12, 6.4e-05, 5.4e-10, 1.8e-13, 1.6e-13, 4.5e-07, 4.7e-11, 3.2e-07, 1.7e-05, 4.1e-07, 0.00018, 1.9e-05, 6.2e-10, 0.00063, 2.4e-12, 0.012, 3.5e-08, 0.00083, 0.0004, 0.058, 6.5e-05, 1.6e-10, 1.3e-05, 0.014, 6.3e-08, 0.00013, 1, 1, 1, 1, 1, 1e-15, 1e-15, 1e-15], "WeakSolutionNames": ["Acetic", "Ascorbic (I)", "Ascorbic (II)", "Benzoic", "Boric (I)", "Boric (II)", "Boric (III)", "Carbonic (I)", "Carbonic (II)", "Citric (I)", "Citric (II)", "Citric (III)", "Formic", "Hydrazidic", "Hydrocyanic", "Hydrofluoric", "Hydrogen Peroxide", "Hydrogen Sulfate Ion", "Hypochlorous", "Lactic", "Nitrous", "Oxalic (I)", "Oxalic (II)", "Phenol", "Propanic", "Sulfurous (I)", "Sulfurous (II)", "Uric", "Hydrochloric Acid", "Nitric Acid", "Hydroiodic Acid", "Perchloric Acid", "Chloric Acid", "Lithium Hydroxide", "Sodium Hydroxide", "Potassium Hydroxide"]}
+{"Solutions" : [
+    {
+    "name": "Lithium Hydroxide",
+    "Ka" : [],
+    "charge" : 1
+    },
+    {
+    "name": "Sodium Hydroxide",
+    "Ka" : [],
+    "charge" : 1
+    },
+    {
+    "name": "Potassium Hydroxide",
+    "Ka" : [],
+    "charge" : 1
+  },
+    {
+      "name": "Hydrochloric Acid",
+      "Ka" : [],
+      "charge" : -1
+    },
+    {
+      "name": "Nitric Acid",
+      "Ka" : [],
+      "charge" : -1
+    },
+    {
+      "name": "Hydroiodic Acid",
+      "Ka" : [],
+      "charge" : -1
+    },
+    {
+      "name": "Perchloric Acid",
+      "Ka" : [],
+      "charge" : -1
+    },
+    {
+      "name": "Chloric Acid",
+      "Ka" : [],
+      "charge" : -1
+    },
+    {
+    "name" : "Uric" ,
+    "Ka" : [0.00013],
+    "charge" : 0
+    },
+    {
+    "name" : "Sulfurous",
+      "Ka" :[ 0.014, 6.3e-08],
+      "charge" : 0
+    },
+    {
+    "name" : "Propanic",
+    "Ka" : [1.3e-05],
+    "charge" : 0
+  },
+    {
+      "name" : "Acetic",
+      "Ka" : [1.8e-05],
+      "charge" : 0
+    },
+    {
+      "name" : "Ascorbic",
+      "Ka" : [7.9e-05, 1.6e-12] ,
+      "charge" : 0
+    },
+    {
+      "name" : "Benzoic",
+      "Ka" : 6.4e-05,
+      "charge" : 0
+    },
+    {
+      "name" : "Boric",
+      "Ka" : [5.4e-10, 1.6e-13, 1.8e-13],
+      "charge" : 0
+    },
+    {
+      "name": "Carbonic",
+      "Ka" : [4.5e-07, 4.7e-11],
+      "charge" : 0
+    },
+    {
+      "name" : "Citric",
+      "Ka" : [3.2e-07, 1.7e-05, 4.1e-07],
+      "charge" : 0
+    },
+    {
+      "name" : "Formic",
+      "Ka" : [0.00018],
+      "charge" : 0
+    },
+    {
+    "name" : "Hydrazidic",
+    "Ka" : [1.9e-05],
+    "charge" : 0
+  },
+    {
+      "name" : "Hydrocyanic",
+      "Ka" : [6.2e-10],
+      "charge" : 0
+    },
+    {
+      "name" : "Hydrofluoric",
+      "Ka" : [0.00063],
+      "charge" : 0
+    },
+    {
+    "name" : "Hydrogen Peroxide",
+    "Ka" : [2.4e-12],
+    "charge" : 0
+  },
+    {
+    "name" : "Hydrogen Sulfate Ion",
+    "Ka" :  0.012,
+    "charge" : -1
+  },
+    {
+    "name": "Hypochlorous Acid",
+    "Ka" : [  3.5e-08],
+    "charge" : 0
+    },
+    {
+    "name" : "Lactic",
+    "Ka" : [0.00083],
+    "charge" : 0
+  },
+    {
+      "name" : "Nitrous",
+      "Ka" : [0.0004],
+      "charge" : 0
+    },
+    {
+      "name" : "Oxalic",
+      "Ka" : [0.058, 6.5e-05],
+      "charge" : 0
+    },
+    {
+      "name" : "Phenol",
+      "Ka" : [1.6e-10],
+      "charge" : 0
+    }
+  ]
+  }
