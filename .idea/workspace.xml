@@ -9,11 +9,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="ADD_SUFFIX_TO_CHERRY_PICKS_OF_PUBLISHED_COMMITS" value="false" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectId" id="1SyYmfkInZMgnYxpXfjZaW8f4YN" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/cmd/git.exe" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -27,7 +31,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.TestCases">
+  <component name="RunManager" selected="Python.UserInterfaceV2">
     <configuration name="TestCases" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Acid-Base-Titration-Simulation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -93,9 +97,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.UserInterfaceV2" />
         <item itemvalue="Python.TestCases" />
         <item itemvalue="Python.Titration" />
-        <item itemvalue="Python.UserInterfaceV2" />
       </list>
     </recent_temporary>
   </component>
@@ -117,7 +121,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -127,16 +133,21 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/UserInterfaceV2.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/TestCases.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestCases.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/UserInterfaceV2.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="Titrant" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
