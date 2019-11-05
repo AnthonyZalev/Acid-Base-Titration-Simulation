@@ -11,7 +11,7 @@ class DataBase:
         with open(filePathNameWithExt,"w") as fp:
             json.dump(data, fp)
 
-    def ReadJSONFile(self, title):
+    def read_json_file(self, key):
         with open(self.filename) as json_file:
             data = json.load(json_file)
-            return data[title]
+            return data[key]
