@@ -3,9 +3,10 @@ import math;
 
 class Solution:
 
-    def __init__(self, name, ka, molarity, volume):
+
+    def __init__(self, name, ka, molarity, volume, charge):
         #  Initialize the solution instance
-        self.SolutionCharge = 0;
+        self.SolutionCharge = charge;
         self.SolutionName = name
         self.SolutionKA = ka;
         self.SolutionMolarity = float(molarity)
@@ -35,5 +36,6 @@ class Solution:
             return True
         else:
             return False
-    def getSolutionMolarity(self):
+
+    def get_solution_molarity(self):
         return self.SolutionMolarity;

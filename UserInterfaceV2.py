@@ -7,7 +7,6 @@ import dash_table
 import pandas as pd
 import plotly.graph_objs as go
 import Titration
-import plotly.plotly as py
 from dash.dependencies import Input, Output, State
 from DataBase import DataBase
 
@@ -130,12 +129,12 @@ app.layout = html.Div(
 
 def get_ka_values(analytesolution, titrantsolution):
     if not (analytesolution is None or titrantsolution is None):
-        analyte_ka = [];
-        titrant_ka = [];
+        analyte_ka = []
+        titrant_ka = []
         for solution in solutions:
-            if solution.get("name").equals(analytesolution):
+            if solution.get("name") == analytesolution:
                 analyte_ka = solution.get("Ka")
-            elif solution.get("name").equals(titrantsolution):
+            elif solution.get("name") == titrantsolution:
                 titrant_ka = solution.get("Ka")
     return analyte_ka, titrant_ka
 
@@ -154,8 +153,14 @@ def update_summary_output(n_clicks, analytevolume, titrantvolume, analytemolarit
     if not (analytesolution is None or titrantsolution is None):
         analyte_ka, titrant_ka = get_ka_values(analytesolution, titrantsolution)
 
-        new_ph = Titration.DeterminePH(Solution("titrant", titrant_ka, titrantmolarity, titrantvolume),
-                                       Solution("analyte", analyte_ka, analytemolarity, analytevolume))
+        for solution in solutions:
+            if solution.get("name") == analytesolution:
+                analyte_charge = solution.get("charge")
+            elif solution.get("name") == titrantsolution:
+                titrant_charge = solution.get("charge")
+
+        new_ph = Titration.DeterminePH(Solution("titrant", titrant_ka, titrantmolarity, titrantvolume, titrant_charge),
+                                       Solution("analyte", analyte_ka, analytemolarity, analytevolume, analyte_charge))
 
         # Updated summary information
         summary = OrderedDict(
@@ -183,13 +188,19 @@ def update_summary_output(n_clicks, analytevolume, titrantvolume, analytemolarit
                State('analyte-solution-state', 'value')])
 def update_output(n_clicks, analytevolume, titrantvolume, analytemolarity, titrantmolarity, titrantsolution,
                   analytesolution):
-    if not (analytesolution is None or titrantsolution is None):
+    if not(analytesolution is None or titrantsolution is None):
         analyte_ka, titrant_ka = get_ka_values(analytesolution, titrantsolution)
 
-        liters_to_ml = .001 # Conversion Factor
+        for solution in solutions:
+            if solution.get("name") == analytesolution:
+                analyte_charge = solution.get("charge")
+            elif solution.get("name") == titrantsolution:
+                titrant_charge = solution.get("charge")
 
-        titrant = Solution(titrantsolution, titrant_ka, titrantmolarity, titrantvolume * liters_to_ml)
-        analyte = Solution(analytesolution, analyte_ka, analytemolarity, analytevolume * liters_to_ml)
+        liters_to_ml = .001  # Conversion Factor
+
+        titrant = Solution(titrantsolution, titrant_ka, titrantmolarity, titrantvolume * liters_to_ml, titrant_charge)
+        analyte = Solution(analytesolution, analyte_ka, analytemolarity, analytevolume * liters_to_ml, analyte_charge)
 
         list_y, list_x = Titration.getCoordinatePairs(titrant, analyte)
 
