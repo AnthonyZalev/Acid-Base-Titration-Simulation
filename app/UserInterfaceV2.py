@@ -1,14 +1,14 @@
 import dash
 from collections import OrderedDict
-from app.Solutions import Solution
+from Solutions import Solution
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table
 import pandas as pd
 import plotly.graph_objs as go
-from app import Titration
+import Titration
 from dash.dependencies import Input, Output, State
-from app.DataBase import DataBase
+from DataBase import DataBase
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)

@@ -1,14 +1,14 @@
-
 import json
-class DataBase:
 
+
+class DataBase:
     def __init__(self):
-        self.path = "./"
-        self.filename = "AcidNameKADAtaBase.json"
+        self.path = "/"
+        self.filename = "app/AcidNameKADAtaBase.json"
 
     def WriteToJSONFIle(self, data):
         filePathNameWithExt = "./" + self.path + "/" + self.filename
-        with open(filePathNameWithExt,"w") as fp:
+        with open(filePathNameWithExt, "w") as fp:
             json.dump(data, fp)
 
     def read_json_file(self, key):

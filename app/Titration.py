@@ -1,4 +1,4 @@
-from app.Solutions import Solution
+from Solutions import Solution
 from pHcalc.pHcalc import Acid, Neutral, System
 
 
