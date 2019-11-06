@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfc064e3-7055-43be-a439-e04949918c2e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AcidNameKADAtaBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/AcidNameKADAtaBase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataBase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Solutions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Solutions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestCases.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/TestCases.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Titration.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Titration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserInterfaceV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/UserInterfaceV2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +34,11 @@
     <property name="last_opened_file_path" value="C:/Program Files/Git/cmd/git.exe" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -54,7 +65,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestCases.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app\TestCases.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -75,7 +86,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Titration.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app\Titration.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -96,7 +107,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/UserInterfaceV2.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app\UserInterfaceV2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -143,12 +154,12 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TestCases.py</url>
+          <url>file://$PROJECT_DIR$/app/TestCases.py</url>
           <line>11</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/UserInterfaceV2.py</url>
+          <url>file://$PROJECT_DIR$/app/UserInterfaceV2.py</url>
           <line>6</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>

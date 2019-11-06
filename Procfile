@@ -1,1 +1,1 @@
-web: gunicorn Acid-Base-Titration-Simulation:server
+web: gunicorn app:app
