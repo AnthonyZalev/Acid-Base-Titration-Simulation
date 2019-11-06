@@ -1,10 +1,6 @@
-import os
-from random import randint
 
 import dash
 from collections import OrderedDict
-
-import flask
 
 from Solutions import Solution
 import dash_core_components as dcc
@@ -16,10 +12,9 @@ import Titration
 from dash.dependencies import Input, Output, State
 from DataBase import DataBase
 
-server = flask.Flask(__name__)
-server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__ ,server = server, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__ , external_stylesheets=external_stylesheets)
+server = app.server
 
 reader = DataBase();
 
