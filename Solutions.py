@@ -1,56 +1,41 @@
-from math import log10
+import math;
+
+
 class Solution:
 
-   def __init__(self, Name, KA, Molarity, Volume):
-       #  Initialize the solution instance
-       self.SolutionName = Name
 
-       try: #When the conjugate base froms no need for KA so this would crash
-           self.SolutionKA = float(KA)
-       except:
-           self.SolutionKA = KA
+    def __init__(self, name, ka, molarity, volume, charge):
+        #  Initialize the solution instance
+        self.SolutionCharge = charge;
+        self.SolutionName = name
+        self.SolutionKA = ka;
+        self.SolutionMolarity = float(molarity)
+        self.SolutionVolume = float(volume)  # In liter's
 
-       self.SolutionMolarity = float(Molarity)
-       self.SolutionVolume = float(Volume) # In liter's
-       self.SolutionMoles = (self.SolutionVolume*.001) * self.SolutionMolarity
+    def calculate_moles(self):
+        return self.SolutionMolarity * self.SolutionVolume;
 
-   def getSolutionMolarity(self):
-       return self.SolutionMolarity
-   def setSolutionMolarity(self,amount):
-       self.SolutionMolarity = amount
+    def change_moles(self, delta_moles):
+        current_moles = self.SolutionMolarity * self.SolutionVolume;
+        current_moles += delta_moles;
+        self.SolutionMolarity = current_moles / self.SolutionVolume
 
-   def getSolutionVolume(self):
-       return self.SolutionVolume
+    def add_volume_dilute(self, added_volume):  # Assumes water added
+        temp_moles = self.calculate_moles();
+        self.SolutionVolume += added_volume  # get new volume
+        self.SolutionMolarity = (temp_moles / (self.SolutionVolume))  # update molarity
 
-   def addVolume(self,AddedVolume):
-       # This procedure adds volume to the solution and adjusts
-       # the solution's molarity based off the new volume
-       moles = self.SolutionMoles #set local variable
-       self.SolutionVolume += AddedVolume #get new volume
-       self.SolutionMolarity = (moles / (self.SolutionVolume*.001)) #update molarity
+    def is_acid(self):
+        if (-1 * math.log10(self.SolutionKA)) < 7:
+            return True;
+        else:
+            return False;
 
-   def getName(self):
-       return self.SolutionName #return name
+    def weak_or_strong(self):
+        if self.SolutionKA <= 1 * math.pow(10, - 14) or self.SolutionKA == 1:
+            return True
+        else:
+            return False
 
-   def getSolutionKA(self):
-       return self.SolutionKA #return KA
-
-   def returnConstructor(self):
-       return self.SolutionName, self.SolutionKA , self.SolutionMolarity, self.SolutionVolume
-
-   def getMoles(self):
-       return self.SolutionMoles
-
-   def setMoles(self, newAmount):
-       self.SolutionMoles = newAmount
-       self.SolutionMolarity = self.SolutionMoles / (self.SolutionVolume * .001)
-
-   def isSolutionStrong(self):
-       if -1*log10(self.getSolutionKA()) >= 12 or -1*log10(self.getSolutionKA()) <= 2:
-           return True
-       else:
-           return False
-
-
-
-
+    def get_solution_molarity(self):
+        return self.SolutionMolarity;

@@ -1,65 +1,40 @@
 from Solutions import Solution
-import math
-
-def DeterminePH(Titrant, Analyte):  #Titrant is solution added #Analyte is Base
-    #  Update Concentrations
-    hydroniumConcentration = 0
-    temp = Titrant.getSolutionVolume()
-    Titrant.addVolume(Analyte.getSolutionVolume())
-    Analyte.addVolume(temp)
+from pHcalc.pHcalc import Acid, Neutral, System
+import numpy as np
+import math;
 
 
-    PH = 0
-    #  If the analyte is the limiting reactant do the following
-    if(Analyte.getMoles() > 0 and Titrant.getMoles() > 0):
-        if Titrant.getMoles() >= Analyte.getMoles(): #If there is more solution to be added than base solution do the following
-            if(Titrant.isSolutionStrong() == True):
-                Titrant.setMoles(Titrant.getMoles() - Analyte.getMoles())
-                hydroniumConcentration = Titrant.getSolutionMolarity()
-                if(Titrant.getSolutionKA() <= .0000001 and not(hydroniumConcentration==0)):
-                    return 14 - (-1 * math.log10(hydroniumConcentration))
-                elif not(hydroniumConcentration == 0):
-                    return (-1 * math.log10(hydroniumConcentration))
-            else:
-                ConjugateConcentrations = Analyte.getSolutionMolarity()
-                Titrant.setMoles(Titrant.getMoles() - Analyte.getMoles())
-                hydroniumConcentration = Titrant.getSolutionKA() * (Titrant.getSolutionMolarity() / ConjugateConcentrations)
-                if not(hydroniumConcentration==0):
-                    return (-1 * math.log10(hydroniumConcentration))
+def DeterminePH(titrant, analyte):  # Titrant is solution added #Analyte is Base
 
-        elif Titrant.getMoles() < Analyte.getMoles():
-            if(Analyte.isSolutionStrong() == True):
-                Analyte.setMoles(Analyte.getMoles() - Titrant.getMoles())
-                hydroniumConcentration = Analyte.getSolutionMolarity()
-                if (Analyte.getSolutionKA() <= .0000001 and not(hydroniumConcentration==0)):
-                    return 14 - (-1 * math.log10(hydroniumConcentration))
-                elif(not(hydroniumConcentration==0)):
-                    return (-1 * math.log10(hydroniumConcentration))
-            else:
-                ConjugateConcentration = Titrant.getSolutionMolarity()
-                Analyte.setMoles(Analyte.getMoles()-Titrant.getMoles())
-                hydroniumConcentration = Analyte.getSolutionKA() * (Analyte.getSolutionMolarity() / ConjugateConcentration)
-                if not(hydroniumConcentration == 0):
-                    return (-1 * math.log10(hydroniumConcentration))
-        return 0
+    solution_volume = titrant.SolutionVolume + analyte.SolutionVolume
+    t_concentration = titrant.calculate_moles() / solution_volume
+    a_concentration = analyte.calculate_moles() / solution_volume
 
-def getCoordinatePairs(titrantsolution,TitrantKA,titrantmolarity,titrantvolume,analytesolution,AnalyteKA,analytemolarity,analytevolume):
+    # Initialize titrant in system
+    if titrant.SolutionKA is None:  # Strong Solution
+        system_titrant = Neutral(charge=titrant.SolutionCharge, conc=t_concentration)
+    else:
+        system_titrant = Acid(Ka=titrant.SolutionKA, charge=titrant.SolutionCharge, conc=t_concentration)
 
-    Ml = []
-    PH = []
-    maximum = 0
-    for x in range(0,titrantvolume*10,1):
-        AddedSolution = Solution("blah", TitrantKA, titrantmolarity, x/10)
-        baseSolution = Solution("haha", AnalyteKA, analytemolarity, analytevolume)
-        PH.append(DeterminePH(AddedSolution,baseSolution))
-        Ml.append(x/10)
-    for x in PH:
-        if(x == 0):
-            PH[PH.index(x)] = (PH[PH.index(x) - 1] + PH[PH.index(x) +1])/2
-        if not(x == None):
-            if (x < 0):
-                PH[PH.index(x)] = (PH[PH.index(x) - 1] + PH[PH.index(x) + 1]) / 2
-    return PH, Ml
+    # Initialize analyte in system
+    if analyte.SolutionKA is None:
+        system_analyte = Neutral(charge=analyte.SolutionCharge, conc=a_concentration)
+    else:
+        system_analyte = Acid(Ka=analyte.SolutionKA, charge=analyte.SolutionCharge, conc=a_concentration)
+
+    system = System(system_titrant, system_analyte);
+    system.pHsolve();
+
+    return system.pH;
 
 
+def getCoordinatePairs(new_titrant, new_analyte):
+    ml_X = []
+    pH_Y = []
+    for x in range(0, int(new_titrant.SolutionVolume * 10000)):
+        titrant = Solution("titrant", new_titrant.SolutionKA, new_titrant.SolutionMolarity,
+                           float(x) / 10000, new_titrant.SolutionCharge)
+        pH_Y.append(DeterminePH(titrant, new_analyte));
+        ml_X.append(float(x) / 10000)
 
+    return pH_Y, ml_X

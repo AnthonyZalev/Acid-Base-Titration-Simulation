@@ -6,30 +6,28 @@ import dash_html_components as html
 import dash_table
 import pandas as pd
 import plotly.graph_objs as go
-
-import plotly.plotly as py
+import Titration
 from dash.dependencies import Input, Output, State
 from DataBase import DataBase
-import Titration
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
-#Section For getting a data for drop down menu
-reader = DataBase()
-Acids = reader.ReadJSONFile("WeakSolutionNames")
-WeakAcidDictionary = []
-for x in Acids:
-    WeakAcidDictionary.append({'label': x, 'value': x})
-WeakAcidTitrant = WeakAcidDictionary
-WeakAcidAnalyte = WeakAcidDictionary
-#initialize graph
 
+reader = DataBase();
 
+# Section For getting a data for drop down menu
+solutions = reader.read_json_file("Solutions")
+solution_name_list = []
+for x in solutions:
+    solution_name_list.append({'label': x.get("name"), 'value': x.get("name")});
+
+# initialize graph
 colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
+# Default Output Table Values
 data = OrderedDict(
     [
         ("Titrant", ["Not Selected"]),
@@ -39,258 +37,195 @@ data = OrderedDict(
         ("PH", [0]),
     ]
 )
+
+# DOM Python Script
 df = pd.DataFrame(data)
-
-
 app.layout = html.Div(
     [
-        #ROW 1
+        # ROW 1
         html.Div(
             [
-                html.H3("Acid Base Graphing Calculator",className = "12 columns", style = {"color":"white","margin": 20,"width":"100vh"})
+                html.H3("Acid Base Graphing Calculator", className="12 columns top-fixed",
+                        style={"color": "white", "margin": 20, "width": "100vh"})
             ]
-            , className = "row", style = {"backgroundColor" :"#629fd1"}),
+            , className="row", style={"backgroundColor": "#629fd1"}),
 
-        #ROW 2
+        # ROW 2
         html.Div(
             [
-            html.Div(
-                [
-                html.Label("Titrant (Solution Added)"),
-                dcc.Dropdown(id ="titrant-solution-state", options= WeakAcidDictionary)
-                ],className = "six columns"),
+                html.Div(
+                    [
+                        html.Label("Titrant (Solution Added)"),
+                        dcc.Dropdown(id="titrant-solution-state", options=solution_name_list)
+                    ], className="six columns"),
                 html.Div(
 
                     [
-                     html.Label("Analyte (Base Solution)"),
-                     dcc.Dropdown(id ="analyte-solution-state", options=WeakAcidDictionary)
-                    ],className="six columns")
-                 ], className= "row",style = {"textAlign": "center"}),
+                        html.Label("Analyte (Base Solution)"),
+                        dcc.Dropdown(id="analyte-solution-state", options=solution_name_list)
+                    ], className="six columns")
+            ], className="row", style={"textAlign": "center"}),
 
-        #ROW 3
+        # ROW 3
         html.Div(
             [
-            #6 Columns
-            html.Div(
-                [
-                    html.Label("Titrant Molarity"),
-                    dcc.Input(id ="titrant-molarity-state", value='', type='number',placeholder='Enter a value...'),
-                ], className="six columns"),
-                 #6 Columns
-            html.Div(
-                [
-                    html.Label("Analyte Molarity"),
-                    dcc.Input(id ="analyte-molarity-state", value='', type='number',placeholder='Enter a value...'),
-                 ],className="six columns")
-            ], className="row",style = {"textAlign": "center"}),
-        #Row 4
-        html.Div(
-             [
-            #6 Columns
-             html.Div(
-                 [
-                      html.Label("Titrant Volume (ml)"),
-                      dcc.Input(id ="titrant-volume-state", value='', type='number',placeholder='Enter a value...'),
-                 ],className="six columns"),
-            #6 Columns
-             html.Div(
-                 [
-                 html.Label("Analyte Volume (ml)"),
-                 dcc.Input(id ="analyte-volume-state" ,value='', type='number',placeholder='Enter a value...' ),
-                 ],className="six columns")
-             ], className="row",style = {"textAlign": "center"}),
-        #Row 5
-        html.Div(
-        [
-            #12 Columns
-            html.Div(
-            [
-                 html.Label("Press When Ready To Begin"),
-                 html.Button('Begin', id='submit-button', n_clicks = 0,style = {'width':'100%'}),
-            ],className = "twelve columns" , style = {"leftMargin" : [10,100,10,100]})
-        ], className="row", style = {"textAlign": "center"}),
-        #Row 6
-        html.Div(
-            [
-                dcc.Graph( id = 'output-state'),
+                # 6 Columns
                 html.Div(
-                     [
-                      html.H3("Titration Number Summary", style = {"textAlign" : "center"}),
-                     ])
+                    [
+                        html.Label("Titrant Molarity"),
+                        dcc.Input(id="titrant-molarity-state", value='', type='number', placeholder='Enter a value...'),
+                    ], className="six columns"),
+                # 6 Columns
+                html.Div(
+                    [
+                        html.Label("Analyte Molarity"),
+                        dcc.Input(id="analyte-molarity-state", value='', type='number', placeholder='Enter a value...'),
+                    ], className="six columns")
+            ], className="row", style={"textAlign": "center"}),
+        # Row 4
+        html.Div(
+            [
+                # 6 Columns
+                html.Div(
+                    [
+                        html.Label("Titrant Volume (ml)"),
+                        dcc.Input(id="titrant-volume-state", value='', type='number', placeholder='Enter a value...'),
+                    ], className="six columns"),
+                # 6 Columns
+                html.Div(
+                    [
+                        html.Label("Analyte Volume (ml)"),
+                        dcc.Input(id="analyte-volume-state", value='', type='number', placeholder='Enter a value...'),
+                    ], className="six columns")
+            ], className="row", style={"textAlign": "center"}),
+        # Row 5
+        html.Div(
+            [
+                # 12 Columns
+                html.Div(
+                    [
+                        html.Label("Press When Ready To Begin"),
+                        html.Button('Begin', id='submit-button', n_clicks=0, style={'width': '100%'}),
+                    ], className="twelve columns", style={"leftMargin": [10, 100, 10, 100]})
+            ], className="row", style={"textAlign": "center"}),
+        # Row 6
+        html.Div(
+            [
+                dcc.Graph(id='output-state'),
+                html.Div(
+                    [
+                        html.H3("Titration Number Summary", style={"textAlign": "center"}),
+                    ])
             ], className="row"),
-        #Row 7
+        # Row 7
         html.Div(
             [
                 dash_table.DataTable(
-                data=df.to_dict('records'),
-                columns=[{'id': c, 'name': c} for c in df.columns])
-            ], className = "row", id = "summary-output")
-    ], style = {"margin" : [10,100,10,100]})
-
-@app.callback(
-    dash.dependencies.Output('titrant-solution-state', 'options'),
-    [dash.dependencies.Input('analyte-solution-state', 'value')])
-
-def update_TitrantList(value):
-    Name = reader.ReadJSONFile("WeakSolutionNames")
-    KA = reader.ReadJSONFile("KAValues")
-    WeakAcidTitrant = WeakAcidDictionary
-    if not(value == None):
-        print("Change")
-        WeakAcidTitrant[Name.index(value)] = ({'label': value, 'value': value, 'disabled' :True})
-        # Test Case If selected solution is weak
-        if(KA[(Name.index(value))] > 1*(10**-14) and KA[(Name.index(value))] < 1):
-            for x in range(0, WeakAcidTitrant.__len__()):
-                if(KA[x] > 1*(10**-14) and KA[x] < 1):
-                    WeakAcidTitrant[x] = ( {'label': Name[x], 'value': Name[x],'disabled': True})  # Which by default, has disabled set to False
-
-            if(KA[(Name.index(value))] > 1*(10**-7) and KA[(Name.index(value))] < 1):
-                for x in range(0, WeakAcidTitrant.__len__()):
-                    if (KA[x] >= 1):
-                        WeakAcidTitrant[x] = ({'label': Name[x], 'value': Name[x], 'disabled': True})  # Which by default, has disabled set to False
-            else:
-                for x in range(0, WeakAcidTitrant.__len__()):
-                    if (KA[x] <= 1*(10**-14)):
-                        WeakAcidTitrant[x] = ({'label': Name[x], 'value': Name[x],'disabled': True})  # Which by default, has disabled set to False
-        if(KA[(Name.index(value))] <= 1*(10**-14) or KA[(Name.index(value))] <= 1):
-             if(KA[(Name.index(value))] <= 1*(10**-14)):
-                 for x in range(0, WeakAcidTitrant.__len__()):
-                     if (KA[x] <= 1 * (10 ** -7)):
-                         WeakAcidTitrant[x] = ({'label': Name[x], 'value': Name[x],
-                                                   'disabled': True})  # Which by default, has disabled set to False
-        if(KA[(Name.index(value))] >= 1):
-            for x in range(0, WeakAcidTitrant.__len__()):
-                if (KA[x] >= (1 * (10 ** -7))):
-                    WeakAcidTitrant[x] = ({'label': Name[x], 'value': Name[x],
-                                              'disabled': True})  # Which by default, has disabled set to False
-        return WeakAcidTitrant
-    if(value == None):
-
-        for x in range(0,WeakAcidTitrant.__len__()):
-            WeakAcidTitrant[x] = ({'label': Name[x], 'value': Name[x]}) #Which by default, has disabled set to False
-        print("None")
-        return WeakAcidTitrant
-
-    return WeakAcidDictionary
-@app.callback(
-    dash.dependencies.Output('analyte-solution-state', 'options'),
-    [dash.dependencies.Input('titrant-solution-state', 'value')])
-
-def update_AnalyteList(value):
-    Name = reader.ReadJSONFile("WeakSolutionNames")
-    KA = reader.ReadJSONFile("KAValues")
-    WeakAcidAnalyte = WeakAcidDictionary
-    if not(value == None):
-        print("Change")
-        WeakAcidAnalyte[Name.index(value)] = ({'label': value, 'value': value, 'disabled' :True})
-        # Test Case If selected solution is weak
-        if(KA[(Name.index(value))] > 1*(10**-14) and KA[(Name.index(value))] < 1):
-            for x in range(0, WeakAcidAnalyte.__len__()):
-                if(KA[x] > 1*(10**-14) and KA[x] < 1):
-                    WeakAcidAnalyte[x] = ( {'label': Name[x], 'value': Name[x],'disabled': True})  # Which by default, has disabled set to False
-
-            if(KA[(Name.index(value))] > 1*(10**-7) and KA[(Name.index(value))] < 1):
-                for x in range(0, WeakAcidAnalyte.__len__()):
-                    if (KA[x] >= 1):
-                        WeakAcidAnalyte[x] = ({'label': Name[x], 'value': Name[x], 'disabled': True})  # Which by default, has disabled set to False
-            else:
-                for x in range(0, WeakAcidAnalyte.__len__()):
-                    if (KA[x] <= 1*(10**-14)):
-                        WeakAcidAnalyte[x] = ({'label': Name[x], 'value': Name[x],'disabled': True})  # Which by default, has disabled set to False
-        if(KA[(Name.index(value))] <= 1*(10**-14) or KA[(Name.index(value))] <= 1):
-             if(KA[(Name.index(value))] <= 1*(10**-14)):
-                 for x in range(0, WeakAcidAnalyte.__len__()):
-                     if (KA[x] <= 1 * (10 ** -7)):
-                         WeakAcidAnalyte[x] = ({'label': Name[x], 'value': Name[x],
-                                                   'disabled': True})  # Which by default, has disabled set to False
-             if(KA[(Name.index(value))] >= 1):
-                 for x in range(0, WeakAcidAnalyte.__len__()):
-                     if (KA[x] >= (1 * (10 ** -7))):
-                         WeakAcidAnalyte[x] = ({'label': Name[x], 'value': Name[x],
-                                                  'disabled': True})  # Which by default, has disabled set to False
-        return WeakAcidAnalyte
-    if(value == None):
-
-        for x in range(0,WeakAcidAnalyte.__len__()):
-            WeakAcidAnalyte[x] = ({'label': Name[x], 'value': Name[x]}) #Which by default, has disabled set to False
-        print("None")
-        return WeakAcidAnalyte
-
-    return WeakAcidDictionary
-
-
-@app.callback(Output('summary-output','children'),[Input('submit-button','n_clicks')],[State('analyte-volume-state','value'),
-                                                                          State('titrant-volume-state', 'value'),
-                                                                          State('analyte-molarity-state', 'value'),
-                                                                          State('titrant-molarity-state', 'value'),
-                                                                          State('titrant-solution-state', 'value'),
-                                                                          State('analyte-solution-state', 'value')])
-def update_summary_output(n_clicks,analytevolume,titrantvolume,analytemolarity,titrantmolarity,titrantsolution,analytesolution):
-    KA = reader.ReadJSONFile("KAValues")
-    Name = reader.ReadJSONFile("WeakSolutionNames")
-    if not (analytesolution == None or titrantsolution == None):
-        AnalyteKA = KA[Name.index(analytesolution)]
-        TitrantKA = KA[Name.index(titrantsolution)]
-        newPh = Titration.DeterminePH(Solution("Blah",TitrantKA,titrantmolarity,titrantvolume),Solution("Blah",AnalyteKA,analytemolarity,analytevolume))
-
-        summary = OrderedDict(
-        [
-            ("Titrant", [titrantsolution]),
-            ("Analyte", [analytesolution]),
-            ("Titrant Volume", [titrantvolume]),
-            ("Analyte Volume", [analytevolume]),
-            ("PH", [newPh]),
-        ]
-        )
-        df = pd.DataFrame(summary)
-        return dash_table.DataTable(
                     data=df.to_dict('records'),
                     columns=[{'id': c, 'name': c} for c in df.columns])
+            ], className="row", id="summary-output")
+    ], style={"margin": [10, 100, 10, 100]})
 
-@app.callback(Output('output-state','figure'),[Input('submit-button','n_clicks')],
-                                                                            [State('analyte-volume-state','value'),
-                                                                          State('titrant-volume-state', 'value'),
-                                                                          State('analyte-molarity-state', 'value'),
-                                                                          State('titrant-molarity-state', 'value'),
-                                                                          State('titrant-solution-state', 'value'),
-                                                                          State('analyte-solution-state', 'value')])
-def update_output(n_clicks,analytevolume,titrantvolume,analytemolarity,titrantmolarity,titrantsolution,analytesolution):
-    KA = reader.ReadJSONFile("KAValues")
-    Name = reader.ReadJSONFile("WeakSolutionNames")
-    if not(analytesolution == None or titrantsolution == None):
-        AnalyteKA = KA[Name.index(analytesolution)]
-        TitrantKA = KA[Name.index(titrantsolution)]
-        listx,listy = Titration.getCoordinatePairs(titrantsolution,
-                                                   TitrantKA,
-                                                   titrantmolarity
-                                                   ,titrantvolume
-                                                   ,analytesolution
-                                                   ,AnalyteKA
-                                                   ,analytemolarity
-                                                   ,analytevolume)
 
-        return {'data' :[go.Scatter(
-            x = listy,
-            y = listx,
-            #mode = 'markers',
+def get_ka_values(analytesolution, titrantsolution):
+    if not (analytesolution is None or titrantsolution is None):
+        analyte_ka = []
+        titrant_ka = []
+        for solution in solutions:
+            if solution.get("name") == analytesolution:
+                analyte_ka = solution.get("Ka")
+            elif solution.get("name") == titrantsolution:
+                titrant_ka = solution.get("Ka")
+    return analyte_ka, titrant_ka
+
+# Event Call Backs
+
+# Begin Titration Button Event
+@app.callback(Output('summary-output', 'children'), [Input('submit-button', 'n_clicks')],
+              [State('analyte-volume-state', 'value'),
+               State('titrant-volume-state', 'value'),
+               State('analyte-molarity-state', 'value'),
+               State('titrant-molarity-state', 'value'),
+               State('titrant-solution-state', 'value'),
+               State('analyte-solution-state', 'value')])
+def update_summary_output(n_clicks, analytevolume, titrantvolume, analytemolarity, titrantmolarity, titrantsolution,
+                          analytesolution):
+    if not (analytesolution is None or titrantsolution is None):
+        analyte_ka, titrant_ka = get_ka_values(analytesolution, titrantsolution)
+
+        for solution in solutions:
+            if solution.get("name") == analytesolution:
+                analyte_charge = solution.get("charge")
+            elif solution.get("name") == titrantsolution:
+                titrant_charge = solution.get("charge")
+
+        new_ph = Titration.DeterminePH(Solution("titrant", titrant_ka, titrantmolarity, titrantvolume, titrant_charge),
+                                       Solution("analyte", analyte_ka, analytemolarity, analytevolume, analyte_charge))
+
+        # Updated summary information
+        summary = OrderedDict(
+            [
+                ("Titrant", [titrantsolution]),
+                ("Analyte", [analytesolution]),
+                ("Titrant Volume", [titrantvolume]),
+                ("Analyte Volume", [analytevolume]),
+                ("PH", [new_ph]),
+            ]
+        )
+
+        data_table = pd.DataFrame(summary)
+        return dash_table.DataTable(
+            data=data_table.to_dict('records'),
+            columns=[{'id': d, 'name': d} for d in data_table.columns])
+
+# Update graph of titration
+@app.callback(Output('output-state', 'figure'), [Input('submit-button', 'n_clicks')],
+              [State('analyte-volume-state', 'value'),
+               State('titrant-volume-state', 'value'),
+               State('analyte-molarity-state', 'value'),
+               State('titrant-molarity-state', 'value'),
+               State('titrant-solution-state', 'value'),
+               State('analyte-solution-state', 'value')])
+def update_output(n_clicks, analytevolume, titrantvolume, analytemolarity, titrantmolarity, titrantsolution,
+                  analytesolution):
+    if not(analytesolution is None or titrantsolution is None):
+        analyte_ka, titrant_ka = get_ka_values(analytesolution, titrantsolution)
+
+        for solution in solutions:
+            if solution.get("name") == analytesolution:
+                analyte_charge = solution.get("charge")
+            elif solution.get("name") == titrantsolution:
+                titrant_charge = solution.get("charge")
+
+        liters_to_ml = .001  # Conversion Factor
+
+        titrant = Solution(titrantsolution, titrant_ka, titrantmolarity, titrantvolume * liters_to_ml, titrant_charge)
+        analyte = Solution(analytesolution, analyte_ka, analytemolarity, analytevolume * liters_to_ml, analyte_charge)
+
+        list_y, list_x = Titration.getCoordinatePairs(titrant, analyte)
+
+        return {'data': [go.Scatter(
+            x= list_x,
+            y= list_y,
+            # mode = 'markers',
             marker={
-            'size': 15,
-            'opacity': 0.5,
-            'line': {'width': 0.5, 'color': 'white'}
-                }
+                'size': 15,
+                'opacity': 0.5,
+                'line': {'width': 0.5, 'color': 'white'}
+            }
         )],
             'layout': go.Layout(
-            xaxis={
-                      'title': 'Ml of Titrant',
-                      'type': 'linear'
-                  },
-                  yaxis = {
-                              'title': 'PH',
-                              'type': 'linear'
-                          },
-                          margin = {'l': 40, 'b': 40, 't': 10, 'r': 0},
-                                   hovermode = 'closest'
-        )
+                xaxis={
+                    'title': 'Ml of Titrant',
+                    'type': 'linear'
+                },
+                yaxis={
+                    'title': 'PH',
+                    'type': 'linear'
+                },
+                margin={'l': 40, 'b': 40, 't': 10, 'r': 0},
+                hovermode='closest'
+            )
         }
     return {'data': [go.Scatter(
         x=[0],
@@ -316,5 +251,6 @@ def update_output(n_clicks,analytevolume,titrantvolume,analytemolarity,titrantmo
         )
     }
 
+
 if __name__ == '__main__':
-    app.run_server(debug=True,port = 8080)
+    app.run_server(debug=True, port=8080)
