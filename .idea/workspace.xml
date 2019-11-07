@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfc064e3-7055-43be-a439-e04949918c2e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/UserInterfaceV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AcidNameKADAtaBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/AcidNameKADAtaBase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Solutions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solutions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TestCases.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestCases.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Titration.py" beforeDir="false" afterPath="$PROJECT_DIR$/Titration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +67,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/DataBase.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\DataBase.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -79,7 +88,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app\TestCases.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\TestCases.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -100,7 +109,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app\Titration.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\Titration.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -121,7 +130,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\app\main.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Anthony\Documents\Acid-Base-Titration-Simulation\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -169,7 +178,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/TestCases.py</url>
+          <url>file://$PROJECT_DIR$/TestCases.py</url>
           <line>11</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>

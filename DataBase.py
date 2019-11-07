@@ -4,7 +4,7 @@ import json
 class DataBase:
     def __init__(self):
         self.path = "/"
-        self.filename = "app/AcidNameKADAtaBase.json"
+        self.filename = "AcidNameKADAtaBase.json"
 
     def WriteToJSONFIle(self, data):
         filePathNameWithExt = "./" + self.path + "/" + self.filename
